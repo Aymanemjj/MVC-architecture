@@ -1,0 +1,16 @@
+{
+    "name": "mawkli/mvcarchitecture",
+    "description": "php-mvc",
+    "autoload": {
+        "psr-4": {
+            "Mawkli\\Mvcarchitecture\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Aymane",
+            "email": "aymanemj@proton.me"
+        }
+    ],
+    "require": {}
+}
