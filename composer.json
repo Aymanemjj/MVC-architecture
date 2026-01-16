@@ -3,7 +3,7 @@
     "description": "php-mvc",
     "autoload": {
         "psr-4": {
-            "Mawkli\\Mvcarchitecture\\": "src/"
+            "app\\": "app/"
         }
     },
     "authors": [
