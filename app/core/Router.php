@@ -71,7 +71,7 @@ class Router
     private function layoutContent()
     {
         ob_start();
-        include_once APplication::$ROOT_DIR . "/app/views/layouts/main.php";
+        include_once Application::$ROOT_DIR . "/app/views/layouts/main.php";
         return ob_get_clean();
     }
     private function renderOnlyView($view, $params)

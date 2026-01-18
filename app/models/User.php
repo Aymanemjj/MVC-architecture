@@ -14,7 +14,7 @@ class User extends BaseModelUser
 
     private string $password;
 
-    private string $role;
+    private string $role = 'user';
 
 
 

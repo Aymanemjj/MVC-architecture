@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\Request;
+use Exception;
 
 class AuthController extends Controller{
 
@@ -13,10 +14,21 @@ class AuthController extends Controller{
     }
 
     public function register(Request $request){
+
         if($request->getMethod()==='post'){
-            return 'handle submited data';
+            $register = new RegisterController();
+            try {
+                $register->registerUser();
+                $role = $_SESSION['role'];
+                return $this->render("$role-dashboard");
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
+            
+        }else{
+            return $this->render('register');
         }
         
-        return $this->render('register');
+        
     }
 }

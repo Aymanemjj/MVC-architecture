@@ -29,14 +29,21 @@
             <a class="nav-link" href="/contact">Contact</a>
           </li>
         </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <?php if(!isset($_SESSION['logged_in'])){
+            echo '<ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/login">login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/register">register</a>
           </li>
-        </ul>
+        </ul>';
+        }else{
+          echo '<form action="" method="post">
+                        <button type="submit" value="register" class="btn btn-primary">Logout</button>
+                    </form>';
+        } ?>
+        
       </div>
     </div>
   </nav>

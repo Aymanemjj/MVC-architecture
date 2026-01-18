@@ -20,7 +20,7 @@ class BaseModelUser
         $stmt->bindValue(':lastname', $this->getLastname(), \PDO::PARAM_STR);
         $stmt->bindValue(':email', $this->getEmail(), \PDO::PARAM_STR);
         $stmt->bindValue(':password', password_hash($this->getPassword(), PASSWORD_DEFAULT), \PDO::PARAM_STR);
-        $stmt->bindValue(':role', $this->getRole(), \PDO::PARAM_INT);
+        $stmt->bindValue(':role', $this->getRole(), \PDO::PARAM_STR);
 
         $stmt->execute();
     }

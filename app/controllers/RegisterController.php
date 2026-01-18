@@ -5,32 +5,38 @@ namespace app\controllers;
 use app\core\Request;
 use app\models\User;
 
-class RegisterController{
+class RegisterController
+{
 
-    public function registerUser(){
-        
+    public function registerUser()
+    {
+
         $user = new User();
         $request = new Request();
         $body = $request->getBody();
-        if($this->isValidPasswordSignUp($body)){
+        if ($this->isValidPasswordSignUp($body)) {
             $user->setters($body);
         }
-        if(!$this->isValidFirstname($user)){
-            return false;
-        }if(!$this->isValidEmailSignUp($user)){
+/*          if ($this->isValidname($user)) {
             return false;
         }
+        if ($this->isValidEmailSignUp($user)) {
+            
+            throw new \Exception("Email is not correct");
+        }  */
+        
         $user->save();
+        $this->startSession($user);
     }
 
-        private function isValidFirstname(object $user): bool
+    private function isValidname(object $user): bool
     {
         $pattern = "/^(.*?)\s([\wáâàãçéêíóôõúüÁÂÀÃÇÉÊÍÓÔÕÚÜ]+\-?'?\w*\.?)$/u";
 
-        if(!preg_match($pattern, $user->getFirstname())){
-            return false;
-        }else if(!preg_match($pattern, $user->getLastname())){
-            return false;
+        if (!preg_match($pattern, $user->getFirstname())) {
+            throw new \Exception("firstname is not correct");
+        } else if (!preg_match($pattern, $user->getLastname())) {
+            throw new \Exception("lastname is not correct");
         }
 
 
@@ -53,10 +59,18 @@ class RegisterController{
 
     private function isValidPasswordSignUp(array $body): bool
     {
-        if($body['password']===$body['confirmPassword']){
+        if ($body['password'] === $body['confirmPassword']) {
             return true;
         }
-        return false;
+        throw new \Exception("passwords are not matching");
     }
 
+    private function startSession($user)
+    {
+        session_start();
+        session_regenerate_id(true);
+        $_SESSION['email']  = $user->getEmail();
+        $_SESSION['role'] = $user->getRole();
+        $_SESSION['logged_in'] = true;
+    }
 }
