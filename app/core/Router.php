@@ -43,14 +43,14 @@ class Router
             $callback[0] = new $callback[0];
         }
         
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
     }
 
-    public function renderView($view)
+    public function renderView($view, $params)
     {
 
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
@@ -74,10 +74,15 @@ class Router
         include_once APplication::$ROOT_DIR . "/app/views/layouts/main.php";
         return ob_get_clean();
     }
-    private function renderOnlyView($view)
+    private function renderOnlyView($view, $params)
     {
+
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+
         ob_start();
-        include_once APplication::$ROOT_DIR . "/app/views/$view.php";
+        include_once Application::$ROOT_DIR . "/app/views/$view.php";
         return ob_get_clean();
     }
 }
