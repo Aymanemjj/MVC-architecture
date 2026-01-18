@@ -13,9 +13,10 @@ class AuthController extends Controller{
     }
 
     public function register(Request $request){
-        if($request->getMethod()==='get'){
-            
+        if($request->getMethod()==='post'){
+            return 'handle submited data';
         }
+        
         return $this->render('register');
     }
 }

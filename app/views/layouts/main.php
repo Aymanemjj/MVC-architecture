@@ -28,13 +28,22 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
           </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/login">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">register</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 
-<div class="container">
+  <div class="container">
     {{content}}
-</div>
+  </div>
 
 
 
